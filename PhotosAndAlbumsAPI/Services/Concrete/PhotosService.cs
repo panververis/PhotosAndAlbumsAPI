@@ -3,8 +3,8 @@ using PhotosAndAlbumsAPI.Models;
 using PhotosAndAlbumsAPI.Services.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace PhotosAndAlbumsAPI.Services.Concrete
@@ -37,8 +37,9 @@ namespace PhotosAndAlbumsAPI.Services.Concrete
             }
             HttpClient httpClient = _clientFactory.CreateClient();
             httpClient.BaseAddress = new Uri(photosUrl);
-            //httpClient.DefaultRequestHeaders.Accept.Add();
-            HttpResponseMessage reponse = await httpClient.GetAsync("/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage reponse = await httpClient.GetAsync("");
             if (reponse.IsSuccessStatusCode) {
                 return await reponse.Content.ReadAsAsync<IEnumerable<Photo>>();
             }
@@ -48,6 +49,5 @@ namespace PhotosAndAlbumsAPI.Services.Concrete
         }
 
         #endregion
-
     }
 }

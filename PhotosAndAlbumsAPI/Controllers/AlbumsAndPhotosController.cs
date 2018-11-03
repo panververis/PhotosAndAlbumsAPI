@@ -29,7 +29,7 @@ namespace PhotosAndAlbumsAPI.Controllers
 
         // GET: api/AlbumsAndPhotos
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAlbumsAndPhotos()
         {
             IEnumerable<AlbumAndPhoto> albumsAndPhotosList = new List<AlbumAndPhoto>();
             try {

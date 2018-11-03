@@ -33,6 +33,20 @@ namespace PhotosAndAlbumsAPI.Models
         }
 
         #endregion
-    }
 
+        #region Methods
+
+        public bool IsPropertyWiseEqual(AlbumAndPhoto otherAlbumAndPhoto)
+        {
+            return (    UserID              == otherAlbumAndPhoto.UserID
+                    &&  AlbumID             == otherAlbumAndPhoto.AlbumID
+                    &&  AlbumTitle          == otherAlbumAndPhoto.AlbumTitle
+                    &&  PhotoID             == otherAlbumAndPhoto.PhotoID
+                    &&  PhotoTitle          == otherAlbumAndPhoto.PhotoTitle
+                    &&  PhotoUrl            == otherAlbumAndPhoto.PhotoUrl
+                    && PhotoThumbnailUrl    == otherAlbumAndPhoto.PhotoThumbnailUrl);
+        }
+
+        #endregion
+    }
 }

@@ -38,19 +38,22 @@ namespace PhotosAndAlbumsAPITests.Helpers
         [Test]
         public void CheckHelperClassReturnsEmptyEnumerableIfNoAlbumsExistAsInput() {
             var albumsAndPhotosEnumerable = _albumsAndPhotosHelper.GetAggregatedAlbumsAndPhotosResult(null, GetTestPhotoList());
-            Assert.Equals(0, albumsAndPhotosEnumerable.Count());
+            Assert.AreEqual(0, albumsAndPhotosEnumerable.Count());
         }
 
         [Test]
         public void CheckHelperClassReturnsEmptyEnumerableIfNoPhotosExistAsInput() {
             var albumsAndPhotosEnumerable = _albumsAndPhotosHelper.GetAggregatedAlbumsAndPhotosResult(GetTestAlbumsList(), null);
-            Assert.Equals(0, albumsAndPhotosEnumerable.Count());
+            Assert.AreEqual(0, albumsAndPhotosEnumerable.Count());
         }
 
         [Test]
         public void CheckHelperClassReturnsCorrectResultIfInputIsCorrect() {
-            IEnumerable<AlbumAndPhoto> albumsAndPhotosEnumerable = _albumsAndPhotosHelper.GetAggregatedAlbumsAndPhotosResult(GetTestAlbumsList(), GetTestPhotoList());
-            CollectionAssert.AreEqual(GetTestAlbumAndPhotoList(), albumsAndPhotosEnumerable);
+            List<AlbumAndPhoto> albumsAndPhotosEnumerable = _albumsAndPhotosHelper.GetAggregatedAlbumsAndPhotosResult(GetTestAlbumsList(), GetTestPhotoList()).ToList();
+            List<AlbumAndPhoto> albumsAndPhotosEnumerableExpected = GetTestAlbumAndPhotoList();
+            for (int i = 0; i < albumsAndPhotosEnumerable.Count(); i++ ) {
+                Assert.IsTrue(albumsAndPhotosEnumerable[i].IsPropertyWiseEqual(albumsAndPhotosEnumerableExpected[i]));
+            }
         }
 
         #endregion
@@ -78,9 +81,9 @@ namespace PhotosAndAlbumsAPITests.Helpers
         private List<AlbumAndPhoto> GetTestAlbumAndPhotoList() {
             return new List<AlbumAndPhoto>() {
                 new AlbumAndPhoto(1, 1, "test_album_1", 1, "test_photo_1", "photo_url_1", "thumbnail_url_1"),
-                new AlbumAndPhoto(1, 2, "test_album_1", 2, "test_photo_2", "photo_url_2", "thumbnail_url_2"),
-                new AlbumAndPhoto(2, 3, "test_album_2", 3, "test_photo_3", "photo_url_3", "thumbnail_url_3"),
-                new AlbumAndPhoto(2, 4, "test_album_2", 4, "test_photo_4", "photo_url_4", "thumbnail_url_4")
+                new AlbumAndPhoto(1, 1, "test_album_1", 2, "test_photo_2", "photo_url_2", "thumbnail_url_2"),
+                new AlbumAndPhoto(2, 2, "test_album_2", 3, "test_photo_3", "photo_url_3", "thumbnail_url_3"),
+                new AlbumAndPhoto(2, 2, "test_album_2", 4, "test_photo_4", "photo_url_4", "thumbnail_url_4")
             };
         }
 

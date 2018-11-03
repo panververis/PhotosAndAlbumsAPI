@@ -8,6 +8,6 @@ namespace PhotosAndAlbumsAPI.Helpers.Interface
 {
     public interface IAlbumsAndPhotosHelper
     {
-        IEnumerable<AlbumAndPhoto> GetAggregatedAlbumAndPhotoResult(IEnumerable<Album> albums, IEnumerable<Photo> photos);
+        IEnumerable<AlbumAndPhoto> GetAggregatedAlbumsAndPhotosResult(IEnumerable<Album> albums, IEnumerable<Photo> photos);
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhotosAndAlbumsAPI.Models;
 using PhotosAndAlbumsAPI.Services.Interface;
@@ -13,7 +11,6 @@ namespace PhotosAndAlbumsAPI.Controllers
     [ApiController]
     public class AlbumsAndPhotosController : ControllerBase
     {
-
         #region Fields
 
         private readonly IAlbumsAndPhotosService _albumsAndPhotosService;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PhotosAndAlbumsAPI.Services.Interface
 {
-    public interface IAlbumsService {
-        Task<IEnumerable<Album>> GetAlbumsAsync();
+    public interface IAlbumsAndPhotosService {
+        Task<IEnumerable<AlbumAndPhoto>> GetAlbumsAndPhotosAsync();
     }
 }

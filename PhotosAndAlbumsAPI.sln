@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotosAndAlbumsAPI", "PhotosAndAlbumsAPI\PhotosAndAlbumsAPI.csproj", "{F1921FCC-1EFD-472E-BA59-7F630A7A7AEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1921FCC-1EFD-472E-BA59-7F630A7A7AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1921FCC-1EFD-472E-BA59-7F630A7A7AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1921FCC-1EFD-472E-BA59-7F630A7A7AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1921FCC-1EFD-472E-BA59-7F630A7A7AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C5978E7-FB26-4CD7-A47F-C5F5419726F9}
+	EndGlobalSection
+EndGlobal

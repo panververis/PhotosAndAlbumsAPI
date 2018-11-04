@@ -5,13 +5,13 @@ i)  Combine them, and expose that as an API.
 ii) Secondly, it will also allow for filtering using a user ID.
 
 
-Information on the code and the decisions taen while bulding it:
+Information on the code and the decisions taken while bulding it:
 
 This exercise took a total of about 4,5 hours.
 
-The project has the following staructure, described from an upper-level perspective:
+The project has the following structure, described from a higher-level perspective:
 There are 2 core services, the "Albums" and the "Photos" service. These are each referencing their respective Urls,
-the two that were provided in teh exercise's description.
+the two that were provided in the exercise's description.
 The results of these two (which are Enumerables of Albums and Photos, respectively) are combined using the "AlbumsAndPhotosHelper" class.
 That happens within the "AlbumsAndPhotosService" class, which is essentialy the Service that provides the API's date,
 by making use, and combining the results of, the underlying Albums and Photos Services.
@@ -27,4 +27,4 @@ separate Controller Actions, as I believe that would be cleaner. They are also U
 iv)  As you can also see, a good example of how DI can be so effortlesly used in .Net Core is in the Startup class,
 where in the "ConfigureServices" method I am registering all of my dependencies
 
-I will be very happy for us to go over my solutions and its structure, and share thoughs on it!
+I will be very happy for us to go over my solution and its structure, and share thoughs on it!

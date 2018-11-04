@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PhotosAndAlbumsAPI.Models;
@@ -31,10 +32,10 @@ namespace PhotosAndAlbumsAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAlbumsAndPhotos()
         {
-            IEnumerable<AlbumAndPhoto> albumsAndPhotosList = new List<AlbumAndPhoto>();
+            IEnumerable<AlbumAndPhoto> albumsAndPhotosEnumerable = new List<AlbumAndPhoto>();
             try {
-                albumsAndPhotosList = await _albumsAndPhotosService.GetAlbumsAndPhotosAsync();
-                return Ok(albumsAndPhotosList);
+                albumsAndPhotosEnumerable = await _albumsAndPhotosService.GetAlbumsAndPhotosAsync();
+                return Ok(albumsAndPhotosEnumerable);
             }
             catch(Exception exception) {
                 return StatusCode(500, $"Server error - {exception.Message}. {exception.InnerException}");
@@ -43,11 +44,17 @@ namespace PhotosAndAlbumsAPI.Controllers
 
         #endregion
 
-        //// GET: api/AlbumsAndPhotos/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET: api/AlbumsAndPhotos/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAlbumsAndPhotosForUser(int id)
+        {
+            try {
+                IEnumerable<AlbumAndPhoto>  albumsAndPhotosEnumerable = await _albumsAndPhotosService.GetAlbumsAndPhotosForUserAsync(id);
+                return Ok(albumsAndPhotosEnumerable);
+            }
+            catch (Exception exception) {
+                return StatusCode(500, $"Server error - {exception.Message}. {exception.InnerException}");
+            }
+        }
     }
 }

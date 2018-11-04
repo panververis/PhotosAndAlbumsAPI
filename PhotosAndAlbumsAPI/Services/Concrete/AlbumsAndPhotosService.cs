@@ -47,6 +47,20 @@ namespace PhotosAndAlbumsAPI.Services.Concrete
             return albumsAndPhotosAggregated;
         }
 
+        public async Task<IEnumerable<AlbumAndPhoto>> GetAlbumsAndPhotosForUserAsync(int userId) {
+            IEnumerable<AlbumAndPhoto> albumsAndPhotosAggregated = new List<AlbumAndPhoto>();
+            IEnumerable<Album> albums = await _albumsService.GetAlbumsForUserAsync(userId);
+            if (albums == null || !albums.Any()) {
+                return albumsAndPhotosAggregated;
+            }
+            IEnumerable<Photo> photos = await _photosService.GetPhotosAsync();
+            if (photos == null || !photos.Any()) {
+                return albumsAndPhotosAggregated;
+            }
+            albumsAndPhotosAggregated = _albumsAndPhotosHelper.GetAggregatedAlbumsAndPhotosResult(albums, photos);
+            return albumsAndPhotosAggregated;
+        }
+
         #endregion
     }
 }

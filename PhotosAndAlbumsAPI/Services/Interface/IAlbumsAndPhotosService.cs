@@ -8,5 +8,6 @@ namespace PhotosAndAlbumsAPI.Services.Interface
 {
     public interface IAlbumsAndPhotosService {
         Task<IEnumerable<AlbumAndPhoto>> GetAlbumsAndPhotosAsync();
+        Task<IEnumerable<AlbumAndPhoto>> GetAlbumsAndPhotosForUserAsync(int userId);
     }
 }

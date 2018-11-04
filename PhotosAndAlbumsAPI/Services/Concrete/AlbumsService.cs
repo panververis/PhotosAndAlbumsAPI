@@ -49,6 +49,28 @@ namespace PhotosAndAlbumsAPI.Services.Concrete
             }
         }
 
+        public async Task<IEnumerable<Album>> GetAlbumsForUserAsync(int userId)
+        {
+            //  Guard Clause - checking for null or empty "Albums" URL configuration missing
+            string albumsUrl = _configuration["AlbumsUrl"];
+            if (String.IsNullOrEmpty(albumsUrl))
+            {
+                throw new Exception($"Configuration {albumsUrl} is not defined");
+            }
+            HttpClient httpClient = _clientFactory.CreateClient();
+            httpClient.BaseAddress = new Uri(albumsUrl);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string parameter = $"/albums/?userId={ userId.ToString()}";
+            HttpResponseMessage reponse = await httpClient.GetAsync(parameter);
+            if (reponse.IsSuccessStatusCode) {
+                return await reponse.Content.ReadAsAsync<IEnumerable<Album>>();
+            }
+            else {
+                return new List<Album>();
+            }
+        }
+
         #endregion
     }
 }

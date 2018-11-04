@@ -18,11 +18,9 @@ namespace PhotosAndAlbumsAPITests.Services
         {
             //  Arrange (mocking all necessary services / and helpers)
             var _albumsServiceMock = new Mock<IAlbumsService>();
-            _albumsServiceMock.Setup(x => x.GetAlbumsAsync())
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
+            _albumsServiceMock.Setup(x => x.GetAlbumsAsync()).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
             var _photosServiceMock = new Mock<IPhotosService>();
-            _photosServiceMock.Setup(x => x.GetPhotosAsync())
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
+            _photosServiceMock.Setup(x => x.GetPhotosAsync()).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
             var _albumsAndPhotosHelperMock = new Mock<IAlbumsAndPhotosHelper>();
             _albumsAndPhotosHelperMock.Setup(x => x.GetAggregatedAlbumsAndPhotosResult(It.IsAny<IEnumerable<Album>>(), It.IsAny<IEnumerable<Photo>>()))
                                 .Returns(It.IsAny<IEnumerable<AlbumAndPhoto>>);
@@ -40,11 +38,9 @@ namespace PhotosAndAlbumsAPITests.Services
         {
             //  Arrange (mocking all necessary services / and helpers)
             var _albumsServiceMock = new Mock<IAlbumsService>();
-            _albumsServiceMock.Setup(x => x.GetAlbumsAsync())
-                                .Returns(Task.FromResult(result: new List<Album>() {} as IEnumerable<Album>));
+            _albumsServiceMock.Setup(x => x.GetAlbumsAsync()).Returns(Task.FromResult(result: new List<Album>() {} as IEnumerable<Album>));
             var _photosServiceMock = new Mock<IPhotosService>();
-            _photosServiceMock.Setup(x => x.GetPhotosAsync())
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
+            _photosServiceMock.Setup(x => x.GetPhotosAsync()).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
             var _albumsAndPhotosHelperMock = new Mock<IAlbumsAndPhotosHelper>();
             _albumsAndPhotosHelperMock.Setup(x => x.GetAggregatedAlbumsAndPhotosResult(It.IsAny<IEnumerable<Album>>(), It.IsAny<IEnumerable<Photo>>()))
                                 .Returns(It.IsAny<IEnumerable<AlbumAndPhoto>>);
@@ -62,11 +58,9 @@ namespace PhotosAndAlbumsAPITests.Services
         {
             //  Arrange (mocking all necessary services / and helpers)
             var _albumsServiceMock = new Mock<IAlbumsService>();
-            _albumsServiceMock.Setup(x => x.GetAlbumsAsync())
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
+            _albumsServiceMock.Setup(x => x.GetAlbumsAsync()).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
             var _photosServiceMock = new Mock<IPhotosService>();
-            _photosServiceMock.Setup(x => x.GetPhotosAsync())
-                                .Returns(Task.FromResult(result: new List<Photo>() { } as IEnumerable<Photo>));
+            _photosServiceMock.Setup(x => x.GetPhotosAsync()).Returns(Task.FromResult(result: new List<Photo>() { } as IEnumerable<Photo>));
             var _albumsAndPhotosHelperMock = new Mock<IAlbumsAndPhotosHelper>();
             _albumsAndPhotosHelperMock.Setup(x => x.GetAggregatedAlbumsAndPhotosResult(It.IsAny<IEnumerable<Album>>(), It.IsAny<IEnumerable<Photo>>()))
                                 .Returns(It.IsAny<IEnumerable<AlbumAndPhoto>>);
@@ -84,11 +78,9 @@ namespace PhotosAndAlbumsAPITests.Services
         {
             //  Arrange (mocking all necessary services / and helpers)
             var _albumsServiceMock = new Mock<IAlbumsService>();
-            _albumsServiceMock.Setup(x => x.GetAlbumsForUserAsync(It.IsAny<int>()))
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
+            _albumsServiceMock.Setup(x => x.GetAlbumsForUserAsync(It.IsAny<int>())).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
             var _photosServiceMock = new Mock<IPhotosService>();
-            _photosServiceMock.Setup(x => x.GetPhotosAsync())
-                                .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
+            _photosServiceMock.Setup(x => x.GetPhotosAsync()).Returns(Task.FromResult(result: It.IsAny<IEnumerable<Photo>>()));
             var _albumsAndPhotosHelperMock = new Mock<IAlbumsAndPhotosHelper>();
             _albumsAndPhotosHelperMock.Setup(x => x.GetAggregatedAlbumsAndPhotosResult(It.IsAny<IEnumerable<Album>>(), It.IsAny<IEnumerable<Photo>>()))
                                 .Returns(It.IsAny<IEnumerable<AlbumAndPhoto>>);
@@ -146,11 +138,11 @@ namespace PhotosAndAlbumsAPITests.Services
         }
 
         [Test]
-        public void CheckAlbumsAndPhotosForUserServiceReturnsOnlyForTheUser()
+        public void CheckAlbumsAndPhotosForUserServiceReturnsOnlyForTheUser([Random(1, 100, 50)] int randomUserID)
         {
             //  Arrange (mocking all necessary services / and helpers)
             var _albumsServiceMock = new Mock<IAlbumsService>();
-            _albumsServiceMock.Setup(x => x.GetAlbumsForUserAsync(2))
+            _albumsServiceMock.Setup(x => x.GetAlbumsForUserAsync(randomUserID))
                                 .Returns(Task.FromResult(result: It.IsAny<IEnumerable<Album>>()));
             var _photosServiceMock = new Mock<IPhotosService>();
             _photosServiceMock.Setup(x => x.GetPhotosAsync())
@@ -161,10 +153,10 @@ namespace PhotosAndAlbumsAPITests.Services
             IAlbumsAndPhotosService albumsAndPhotosService = new AlbumsAndPhotosService(_albumsServiceMock.Object, _photosServiceMock.Object, _albumsAndPhotosHelperMock.Object);
 
             //  Act
-            var albumAndPhotos = albumsAndPhotosService.GetAlbumsAndPhotosForUserAsync(2).Result;
+            var albumAndPhotos = albumsAndPhotosService.GetAlbumsAndPhotosForUserAsync(randomUserID).Result;
 
             //  Assert
-            Assert.AreEqual(albumAndPhotos.All(x => x.UserID == 2), true);
+            Assert.AreEqual(albumAndPhotos.All(x => x.UserID == randomUserID), true);
         }
     }
 }

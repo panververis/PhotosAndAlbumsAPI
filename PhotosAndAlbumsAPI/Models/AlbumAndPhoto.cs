@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PhotosAndAlbumsAPI.Models
+﻿namespace PhotosAndAlbumsAPI.Models
 {
+    /// <summary>
+    /// "AlbumAndPhoto", used to hold the aggregated data of Albums and Photos (joined on their AlbumID).
+    /// </summary>
+    /// <remarks>
+    /// Mind to review the "IsPropertyWiseEqual" property in case Properties are added!
+    /// </remarks>
     public class AlbumAndPhoto
     {
         #region Properties
@@ -36,6 +37,9 @@ namespace PhotosAndAlbumsAPI.Models
 
         #region Methods
 
+        /// <summary>
+        /// Comparer function used to facilitate the check of whether two AlbumAndPhoto objects are Equal with regards to their Properties
+        /// </summary>
         public bool IsPropertyWiseEqual(AlbumAndPhoto otherAlbumAndPhoto)
         {
             return (    UserID              == otherAlbumAndPhoto.UserID
@@ -44,7 +48,7 @@ namespace PhotosAndAlbumsAPI.Models
                     &&  PhotoID             == otherAlbumAndPhoto.PhotoID
                     &&  PhotoTitle          == otherAlbumAndPhoto.PhotoTitle
                     &&  PhotoUrl            == otherAlbumAndPhoto.PhotoUrl
-                    && PhotoThumbnailUrl    == otherAlbumAndPhoto.PhotoThumbnailUrl);
+                    &&  PhotoThumbnailUrl   == otherAlbumAndPhoto.PhotoThumbnailUrl);
         }
 
         #endregion

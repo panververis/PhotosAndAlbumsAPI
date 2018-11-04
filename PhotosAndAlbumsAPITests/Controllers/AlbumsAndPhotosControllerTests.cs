@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using PhotosAndAlbumsAPI.Controllers;
@@ -21,8 +20,7 @@ namespace PhotosAndAlbumsAPITests.Controllers
 
             //  Arrange
             var albumsAndPhotosServiceMock = new Mock<IAlbumsAndPhotosService>();
-            albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosAsync())
-                                .Throws<Exception>();
+            albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosAsync()).Throws<Exception>();
             var albumsAndPhotosController = new AlbumsAndPhotosController(albumsAndPhotosServiceMock.Object);
 
             //  Act
@@ -34,14 +32,16 @@ namespace PhotosAndAlbumsAPITests.Controllers
         }
 
         [Test]
-        public async Task AlbumsAndPhotosControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturns()
+        public async Task AlbumsAndPhotosControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturns(
+            [Random(1, 100, 5)] int randomUserID, 
+            [Random(1, 100, 5)] int albumID,
+            [Random(1, 100, 5)] int photoID)
         {
-
             //  Arrange
-            var albumAndPhotoForTest = new AlbumAndPhoto(1, 1, "", 1, "", "", "");
+            var albumAndPhotoForTest = new AlbumAndPhoto(randomUserID, albumID, "", photoID, "", "", "");
             var albumsAndPhotosServiceMock = new Mock<IAlbumsAndPhotosService>();
             albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosAsync())
-                                .Returns(Task.FromResult(result: new List<AlbumAndPhoto>() { albumAndPhotoForTest } as IEnumerable<AlbumAndPhoto>));
+                .Returns(Task.FromResult(result: new List<AlbumAndPhoto>() { albumAndPhotoForTest } as IEnumerable<AlbumAndPhoto>));
             var albumsAndPhotosController = new AlbumsAndPhotosController(albumsAndPhotosServiceMock.Object);
 
             //  Act
@@ -59,8 +59,7 @@ namespace PhotosAndAlbumsAPITests.Controllers
 
             //  Arrange
             var albumsAndPhotosServiceMock = new Mock<IAlbumsAndPhotosService>();
-            albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosForUserAsync(It.IsAny<int>()))
-                                .Throws<Exception>();
+            albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosForUserAsync(It.IsAny<int>())).Throws<Exception>();
             var albumsAndPhotosController = new AlbumsAndPhotosController(albumsAndPhotosServiceMock.Object);
 
             //  Act
@@ -72,11 +71,13 @@ namespace PhotosAndAlbumsAPITests.Controllers
         }
 
         [Test]
-        public async Task AlbumsAndPhotosForUserControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturns()
+        public async Task AlbumsAndPhotosForUserControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturns(
+            [Random(1, 100, 5)] int randomUserID,
+            [Random(1, 100, 5)] int albumID,
+            [Random(1, 100, 5)] int photoID)
         {
-
             //  Arrange
-            var albumAndPhotoForTest = new AlbumAndPhoto(1, 1, "", 1, "", "", "");
+            var albumAndPhotoForTest = new AlbumAndPhoto(randomUserID, albumID, "", photoID, "", "", "");
             var albumsAndPhotosServiceMock = new Mock<IAlbumsAndPhotosService>();
             albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosForUserAsync(1))
                                 .Returns(Task.FromResult(result: new List<AlbumAndPhoto>() { albumAndPhotoForTest } as IEnumerable<AlbumAndPhoto>));
@@ -92,11 +93,11 @@ namespace PhotosAndAlbumsAPITests.Controllers
         }
 
         [Test]
-        public async Task AlbumsAndPhotosForUserControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturnsOnlyForTheUser()
+        public async Task AlbumsAndPhotosForUserControllerActionReturnsOkResultWithWhatTheAlbumsAndPhotosServiceReturnsOnlyForTheUser([Random(1, 100, 50)] int randomUserID)
         {
 
             //  Arrange
-            var albumAndPhotoForTest = new AlbumAndPhoto(2, 1, "", 1, "", "", "");
+            var albumAndPhotoForTest = new AlbumAndPhoto(randomUserID, 1, "", 1, "", "", "");
             var albumsAndPhotosServiceMock = new Mock<IAlbumsAndPhotosService>();
             albumsAndPhotosServiceMock.Setup(x => x.GetAlbumsAndPhotosForUserAsync(2))
                                 .Returns(Task.FromResult(result: new List<AlbumAndPhoto>() { albumAndPhotoForTest } as IEnumerable<AlbumAndPhoto>));
@@ -109,7 +110,7 @@ namespace PhotosAndAlbumsAPITests.Controllers
             Assert.IsInstanceOf(typeof(OkObjectResult), result);
             Assert.IsInstanceOf(typeof(IEnumerable<AlbumAndPhoto>), (result as OkObjectResult).Value);
             Assert.AreEqual(((result as OkObjectResult).Value as IEnumerable<AlbumAndPhoto>).FirstOrDefault(), albumAndPhotoForTest);
-            Assert.AreEqual(((result as OkObjectResult).Value as IEnumerable<AlbumAndPhoto>).All(x => x.UserID == 2), true);
+            Assert.AreEqual(((result as OkObjectResult).Value as IEnumerable<AlbumAndPhoto>).All(x => x.UserID == randomUserID), true);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using PhotosAndAlbumsAPI.Helpers.Interface;
 using PhotosAndAlbumsAPI.Models;
 using PhotosAndAlbumsAPI.Services.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

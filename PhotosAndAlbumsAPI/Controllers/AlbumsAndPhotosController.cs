@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PhotosAndAlbumsAPI.Models;
@@ -42,19 +41,20 @@ namespace PhotosAndAlbumsAPI.Controllers
             }
         }
 
-        #endregion
-
         // GET: api/AlbumsAndPhotos/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAlbumsAndPhotosForUser(int id)
         {
+            IEnumerable<AlbumAndPhoto> albumsAndPhotosEnumerable = new List<AlbumAndPhoto>();
             try {
-                IEnumerable<AlbumAndPhoto>  albumsAndPhotosEnumerable = await _albumsAndPhotosService.GetAlbumsAndPhotosForUserAsync(id);
+                albumsAndPhotosEnumerable = await _albumsAndPhotosService.GetAlbumsAndPhotosForUserAsync(id);
                 return Ok(albumsAndPhotosEnumerable);
             }
             catch (Exception exception) {
                 return StatusCode(500, $"Server error - {exception.Message}. {exception.InnerException}");
             }
         }
+
+        #endregion
     }
 }

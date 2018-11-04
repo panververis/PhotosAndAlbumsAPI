@@ -3,10 +3,8 @@ using NUnit.Framework;
 using PhotosAndAlbumsAPI.Helpers.Concrete;
 using PhotosAndAlbumsAPI.Helpers.Interface;
 using PhotosAndAlbumsAPI.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PhotosAndAlbumsAPITests.Helpers
 {
